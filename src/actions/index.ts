@@ -3,7 +3,7 @@
 import { getCurrentSession, deleteSession } from "@/lib/cookie";
 import { invalidateSessions } from "@/lib/session";
 import { redirect } from "next/navigation";
-import {prisma} from "@/lib/db";
+import { prisma } from "@/lib/db";
 
 export const logoutActions = async () => {
   const { session } = await getCurrentSession();
@@ -19,10 +19,9 @@ export const logoutActions = async () => {
   return redirect("/signin");
 };
 
-
-export const fetchRestaurantInfo = async (restaurantId : string) => {
+export const fetchRestaurantInfo = async (restaurantId: string) => {
   try {
-    const {session} = await getCurrentSession();
+    const { session } = await getCurrentSession();
 
     if (session === null) {
       return {
@@ -30,16 +29,18 @@ export const fetchRestaurantInfo = async (restaurantId : string) => {
       };
     }
 
-    const restaurantInfo = await prisma.restaurant.findUnique({where : {id : restaurantId}});
+    const restaurantInfo = await prisma.restaurant.findUnique({
+      where: { id: restaurantId },
+    });
     return restaurantInfo;
   } catch (e) {
     console.log(e);
   }
-}
+};
 
-export const fetchMenus = async (restaurantId : string) => {
+export const fetchMenus = async (restaurantId: string) => {
   try {
-    const {session} = await getCurrentSession();
+    const { session } = await getCurrentSession();
 
     if (session === null) {
       return {
@@ -48,24 +49,24 @@ export const fetchMenus = async (restaurantId : string) => {
     }
 
     const menus = await prisma.menu.findMany({
-      where : {
-        restaurantId
+      where: {
+        restaurantId,
       },
-      include : {
-        menuItems : true
-      }
-    })
+      include: {
+        menuItems: true,
+      },
+    });
 
     return menus;
   } catch (e) {
     console.log(e);
     return [];
   }
-}
+};
 
-export const fetchOrders = async (restaurantId : string) => {
+export const fetchOrders = async (restaurantId: string) => {
   try {
-    const {session} = await getCurrentSession();
+    const { session } = await getCurrentSession();
 
     if (session === null) {
       return {
@@ -74,27 +75,27 @@ export const fetchOrders = async (restaurantId : string) => {
     }
 
     const orders = await prisma.order.findMany({
-      where : {
-        restaurantId
+      where: {
+        restaurantId,
       },
-      include : {
-        orderItems : true,
-        user : {
-          select : {
-            name : true,
-            address : true
-          }
+      include: {
+        orderItems: true,
+        user: {
+          select: {
+            name: true,
+            address: true,
+          },
         },
-        rider : {
-          select : {
-            name : true,
-            address : true
-          }
-        }
-      }
-    })
+        rider: {
+          select: {
+            name: true,
+            address: true,
+          },
+        },
+      },
+    });
     return orders;
   } catch (e) {
     console.log(e);
   }
-}
+};

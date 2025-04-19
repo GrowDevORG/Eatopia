@@ -5,7 +5,7 @@ import { CreateRestaurant } from "@/app/dashboard/restaurant/action";
 export const useRestaurantForm = () => {
   const { onFormSubmit, control, reset, register, errors } = useZodForm(
     RestaurantFormSchema,
-    CreateRestaurant
+    CreateRestaurant,
   );
   return { onFormSubmit, control, register, reset, errors };
 };

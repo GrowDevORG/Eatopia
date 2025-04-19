@@ -1,27 +1,30 @@
-"use client"
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-    DialogTrigger
-} from "@/components/ui/dialog"
-import { createMenu } from "@/app/dashboard/restaurant/action"
-import {useMutationData} from "@/hooks/useMutationData";
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { createMenu } from "@/app/dashboard/restaurant/action";
+import { useMutationData } from "@/hooks/useMutationData";
 
 export function CreateMenuModal({ restaurantId }: { restaurantId: string }) {
-
-  const {isPending,mutate} = useMutationData(["create-menu"], () => createMenu(restaurantId), "restaurant-menu");
+  const { isPending, mutate } = useMutationData(
+    ["create-menu"],
+    () => createMenu(restaurantId),
+    "restaurant-menu",
+  );
 
   return (
-    <Dialog
-    >
-      <DialogTrigger>
-        create
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]" onPointerDownOutside={(e) => e.preventDefault()}>
+    <Dialog>
+      <DialogTrigger>create</DialogTrigger>
+      <DialogContent
+        className="sm:max-w-[425px]"
+        onPointerDownOutside={(e) => e.preventDefault()}
+      >
         <DialogHeader>
           <DialogTitle>Create Restaurant Menu</DialogTitle>
         </DialogHeader>
@@ -38,5 +41,5 @@ export function CreateMenuModal({ restaurantId }: { restaurantId: string }) {
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

@@ -45,6 +45,7 @@ model Restaurant {
   address  String
   owner    User    @relation(fields: [ownerId], references: [id])
   imageUrl String?
+  cuisine  String
   ownerId  String
   menus    Menu[]
   orders   Order[]

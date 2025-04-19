@@ -50,20 +50,46 @@ export const RestaurantFormSchema = z.object({
     .min(10, { message: "Address must be at least 10 characters long." })
     .max(255, { message: "Address cannot exceed 255 characters." })
     .trim(),
+  cuisine: z.string(),
+  imageUrl: z.string(),
 });
 
 export const MenuItemFormSchema = z.object({
   name: z
-      .string()
-      .min(2, { message: "Restaurant name must be at least 2 characters long." })
-      .max(100, { message: "Restaurant name cannot exceed 100 characters." })
-      .trim(),
-  price : z.string(),
-  imageUrl : z.string(),
-})
+    .string()
+    .min(2, { message: "Restaurant name must be at least 2 characters long." })
+    .max(100, { message: "Restaurant name cannot exceed 100 characters." })
+    .trim(),
+  price: z.string(),
+  imageUrl: z.string(),
+});
 
-export type RestaurantInfoProps = {     id: string  ,   name: string  ,   address: string ,    ownerId: string, imageUrl: string }
+export type RestaurantInfoProps = {
+  id: string;
+  name: string;
+  address: string;
+  ownerId: string;
+  imageUrl: string;
+};
 
-export type MenuProps = ({     menuItems: {         name: string   ,      id: string   ,      imageUrl: string   ,      price: number,         menuId: string     }[] } & {     id: string  ,   restaurantId: string })
+export type MenuProps = {
+  menuItems: {
+    name: string;
+    id: string;
+    imageUrl: string;
+    price: number;
+    menuId: string;
+  }[];
+} & { id: string; restaurantId: string };
 
-export type OrderProps = ({     user: {         name: string    ,     address: string     }    , rider: {         name: string  ,       address: string     } | null   ,  orderItems: {         id: string     ,    orderId: string     }[] } & {     id: string  ,   userId: string  ,   restaurantId: string  ,   status: string  ,   riderId: string | null })
+export type OrderProps = {
+  user: { name: string; address: string };
+  rider: { name: string; address: string } | null;
+  orderItems: { id: string; orderId: string }[];
+} & {
+  id: string;
+  userId: string;
+  restaurantId: string;
+  status: string;
+  riderId: string | null;
+};
