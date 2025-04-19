@@ -55,9 +55,9 @@ const CreateRestaurant = () => {
             <FormGenerator
               inputType={"input"}
               register={register}
-              name={"image_url"}
+              name={"imageUrl"}
               errors={errors}
-              placeholder={"image"}
+              placeholder={"imageUrl"}
               type={"text"}
               label={"image"}
             />

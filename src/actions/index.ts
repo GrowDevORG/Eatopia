@@ -43,9 +43,7 @@ export const fetchMenus = async (restaurantId: string) => {
     const { session } = await getCurrentSession();
 
     if (session === null) {
-      return {
-        message: "Not authenticated",
-      };
+      return []
     }
 
     const menus = await prisma.menu.findMany({

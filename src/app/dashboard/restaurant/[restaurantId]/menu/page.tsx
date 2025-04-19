@@ -5,6 +5,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import Restaurant from "@/components/restaurant";
+import { CreateMenuModal } from "@/components/create-menu-modal";
 
 const Page = async ({ params }: { params: { restaurantId: string } }) => {
   const { restaurantId } = await params;
@@ -15,10 +16,13 @@ const Page = async ({ params }: { params: { restaurantId: string } }) => {
     queryKey: ["restaurant-menu"],
     queryFn: () => fetchMenus(restaurantId),
   });
+  const menus = await fetchMenus( restaurantId ) 
+
+  if(!menus.length) return  <CreateMenuModal restaurantId={restaurantId} />
 
   return (
     <HydrationBoundary state={dehydrate(query)}>
-      <Restaurant restaurantId={restaurantId} />
+      <Restaurant restaurantId={restaurantId}/>
     </HydrationBoundary>
   );
 };
